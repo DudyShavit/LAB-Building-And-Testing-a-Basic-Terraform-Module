@@ -1,5 +1,5 @@
 ﻿**Building And Testing a Basic Terraform Module**
-
+  
 **Introduction**
 
 Terraform modules are a good way to abstract out repeated chunks of code, making it reusable across other Terraform projects and configurations. In this hands-on lab, we'll be writing a basic Terraform module from scratch and then testing it out.

@@ -39,7 +39,7 @@ cd /home/cloud\_user/terraform\_project/modules/vpc/
 vim main.tf
 
 1. In the file, insert and review the provided code:
-
+~~~
 provider "aws" {
 
 `  `region = var.region
@@ -65,14 +65,14 @@ data "aws\_ssm\_parameter" "this" {
 `  `name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86\_64-gp2"
 
 }
-
+~~~
 1. Press **Escape** and enter :wq to save and exit the file.
 1. Create a new file called variables.tf:
 
 vim variables.tf
 
 1. In the file, insert and review the provided code:
-
+~~~
 variable "region" {
 
 `  `type    = string
@@ -80,14 +80,14 @@ variable "region" {
 `  `default = "us-east-1"
 
 }
-
+~~~
 1. Press **Escape** and enter :wq to save and exit the file.
 1. Create a new file called outputs.tf:
 
 vim outputs.tf
 
 1. In the file, insert and review the provided code:
-
+~~~
 output "subnet\_id" {
 
 `  `value = aws\_subnet.this.id
@@ -99,7 +99,7 @@ output "ami\_id" {
 `  `value = data.aws\_ssm\_parameter.this.value
 
 }
-
+~~~
 **Note:** The code in outputs.tf is critical to exporting values to your main Terraform code, where you'll be referencing this module. Specifically, it returns the subnet and AMI IDs for your EC2 instance.
 
 1. Press **Escape** and enter :wq to save and exit the file.
@@ -115,7 +115,7 @@ cd ~/terraform\_project
 vim main.tf
 
 1. In the file, insert and review the provided code:
-
+~~~
 variable "main\_region" {
 
 `  `type    = string
@@ -147,7 +147,7 @@ resource "aws\_instance" "my-instance" {
 `  `instance\_type = "t2.micro"
 
 }
-
+~~~
 **Note:** The code in main.tf invokes the VPC module that you created earlier. Notice how you're referencing the code using the source option within the module block to let Terraform know where the module code resides.
 
 1. Press **Escape** and enter :wq to save and exit the file.
@@ -156,7 +156,7 @@ resource "aws\_instance" "my-instance" {
 vim outputs.tf
 
 1. In the file, insert and review the provided code:
-
+~~~
 output "PrivateIP" {
 
 `  `description = "Private IP of EC2 instance"
@@ -164,7 +164,7 @@ output "PrivateIP" {
 `  `value       = aws\_instance.my-instance.private\_ip
 
 }
-
+~~~
 1. Press **Escape** and enter :wq to save and exit the file.
 
 **Deploy Your Code and Test Out Your Module**
